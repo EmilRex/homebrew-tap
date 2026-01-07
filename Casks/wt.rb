@@ -3,7 +3,7 @@ cask "wt" do
   name "wt"
   desc "Manage isolated git worktrees for parallel Claude Code sessions"
   homepage "https://github.com/emilrex/wt"
-  version "0.1.3"
+  version "0.1.4"
 
   livecheck do
     skip "Auto-generated on release."
@@ -14,23 +14,27 @@ cask "wt" do
   on_macos do
     on_intel do
       url "https://github.com/EmilRex/wt/releases/download/v#{version}/wt_#{version}_darwin_amd64.tar.gz"
-      sha256 "5b8af48965b2a28958e3ef5520062e13fc187ad7b9cb5a35888445f839173ab2"
+      sha256 "60b78e96c37825e31572e80373e03ae80eba6999710e3911e1ad329ea1c360cb"
     end
     on_arm do
       url "https://github.com/EmilRex/wt/releases/download/v#{version}/wt_#{version}_darwin_arm64.tar.gz"
-      sha256 "117d1e73c3ad450bb521ac97b38689bbc4d781a6e667f35467104bdfccfb8879"
+      sha256 "efd67a5e5efe92d145a888ec71d6d47070be2524fd1830013a382d4940860198"
     end
   end
 
   on_linux do
     on_intel do
       url "https://github.com/EmilRex/wt/releases/download/v#{version}/wt_#{version}_linux_amd64.tar.gz"
-      sha256 "6ec32f66a1f1dd3bfce46776c6483c88fade97a7d5852e06c9b80a92a3696049"
+      sha256 "90f8b7be16771364143f9c1c6bbd1faff17caf869f42ef19fb82344754170554"
     end
     on_arm do
       url "https://github.com/EmilRex/wt/releases/download/v#{version}/wt_#{version}_linux_arm64.tar.gz"
-      sha256 "265a3a056dcc12b109ede25c8f3d082c7d0ddcdc1a16f1c7438722def3cf8e18"
+      sha256 "1a62cb227f59183a2cb229d4972bfa754f81d32166782f3294129cefdda7612c"
     end
+  end
+
+  postflight do
+    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/wt"]
   end
 
   # No zap stanza required
